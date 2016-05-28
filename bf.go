@@ -27,7 +27,7 @@ func (o *State) Step() bool {
   branching := (opcode & 0xC0) != 0x00  // Branch or branch0.
   op_branch := (opcode & 0xC0) == 0x80  // Branch always.
   op_branch0 := (opcode & 0xC0) == 0xC0  // Branch if m == 0.
-  dest := opcode & 0x2F  // Low 6 bits, for branch destination.
+  dest := opcode & 0x3F  // Low 6 bits, for branch destination.
   op := opcode & 0x07  // Low 3 bits, for non-branching op.
 
   op_left := !branching && op == 1
