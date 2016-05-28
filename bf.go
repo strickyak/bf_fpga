@@ -25,7 +25,7 @@ func (o *State) Step() bool {
 
   opcode := o.Prog[o.PC]
   branching := (opcode & 0xC0) != 0x00  // Branch or branch0.
-  op_branch := (opcode & 0xC0) == 0xC0  // Branch always.
+  op_branch := (opcode & 0xC0) == 0x80  // Branch always.
   op_branch0 := (opcode & 0xC0) == 0xC0  // Branch if m == 0.
   dest := opcode & 0x2F  // Low 6 bits, for branch destination.
   op := opcode & 0x07  // Low 3 bits, for non-branching op.
@@ -59,7 +59,7 @@ func (o *State) Step() bool {
   if enable_write {
     o.Tape[tp] = next_m
   }
-  return (op != 0)
+  return (opcode != 0)
 }
 
 func (o *State) Input() byte {
